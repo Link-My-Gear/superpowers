@@ -65,6 +65,8 @@ Or ask: "This branch split from main - is that correct?"
 
 ### Step 4: Present Options
 
+**LMG Workspace Policy:** If the active project/workspace path matches `/Volumes/LargeDrive/lmg/*`, you **MUST NOT** present options or ask the user what to do. You **MUST** automatically execute the `ship-pr` skill (Phase 1 through Phase 5) to run reviews/tests and create the Pull Request automatically. Bypassing this automatic ship-pr execution is not allowed.
+
 **Normal repo and named-branch worktree — present exactly these 4 options:**
 
 ```
