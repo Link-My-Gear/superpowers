@@ -31,10 +31,12 @@ You MUST create a task for each of these items and complete them in order:
 5. **Ask clarifying questions** — one at a time, understand purpose/constraints/success criteria
 6. **Propose 2-3 approaches** — with trade-offs and your recommendation
 7. **Present design** — in sections scaled to their complexity, get user approval after each section
-8. **Write design doc** — save to `docs/superpowers/specs/YYYY-MM-DD-<topic>-design.md` and commit
-9. **Spec self-review** — quick inline check for placeholders, contradictions, ambiguity, scope (see below)
-10. **User reviews written spec** — ask user to review the spec file before proceeding
-11. **Transition to implementation** — invoke writing-plans skill to create implementation plan
+8. **Write design doc** — save to `docs/superpowers/specs/YYYY-MM-DD-<topic>-design.md` and commit.
+9. **Hook up references on Jira** — post a Jira comment with a reference to the written spec / recommended proposal path so that reviewers can access the recommendation to be reviewed:
+   - Comment: `uv run python -m helpers.atlassian_cli.cli jira add-comment <KEY> --comment "🤖 Design proposal/recommendation ready for review: docs/superpowers/specs/YYYY-MM-DD-<topic>-design.md"`
+10. **Spec self-review** — quick inline check for placeholders, contradictions, ambiguity, scope (see below)
+11. **User reviews written spec** — ask user to review the spec file before proceeding
+12. **Transition to implementation** — invoke writing-plans skill to create implementation plan
 
 ## Process Flow
 
@@ -46,6 +48,7 @@ digraph brainstorming {
     "Present design sections" [shape=box];
     "User approves design?" [shape=diamond];
     "Write design doc" [shape=box];
+    "Hook up references on Jira" [shape=box];
     "Spec self-review\n(fix inline)" [shape=box];
     "User reviews spec?" [shape=diamond];
     "Invoke writing-plans skill" [shape=doublecircle];
@@ -56,7 +59,8 @@ digraph brainstorming {
     "Present design sections" -> "User approves design?";
     "User approves design?" -> "Present design sections" [label="no, revise"];
     "User approves design?" -> "Write design doc" [label="yes"];
-    "Write design doc" -> "Spec self-review\n(fix inline)";
+    "Write design doc" -> "Hook up references on Jira";
+    "Hook up references on Jira" -> "Spec self-review\n(fix inline)";
     "Spec self-review\n(fix inline)" -> "User reviews spec?";
     "User reviews spec?" -> "Write design doc" [label="changes requested"];
     "User reviews spec?" -> "Invoke writing-plans skill" [label="approved"];
