@@ -21,19 +21,20 @@ Every project goes through this process. A todo list, a single-function utility,
 
 You MUST create a task for each of these items and complete them in order:
 
-1. **Explore project context** — check files, docs, recent commits
-2. **Claim ticket on Jira** — if this brainstorming is for a specific Jira ticket (e.g. ARG-XXX), ensure it is transitioned to **In Development** and post a comment with the current stream name (e.g. `lmg-streem-4`).
+1. **Refresh Workspace Stream**: If the active project/workspace is located under `/Volumes/LargeDrive/lmg/` (any stream folder), you **MUST** run the `refresh-stream` skill (by executing `uv run /Volumes/LargeDrive/lmg/cursor-skills/scripts/reset-stream-repos.py --yes` inside LMG workspace streams) before exploring files or planning, ensuring that you brainstorm on the latest available code on main.
+2. **Explore project context** — check files, docs, recent commits
+3. **Claim ticket on Jira** — if this brainstorming is for a specific Jira ticket (e.g. ARG-XXX), ensure it is transitioned to **In Development** and post a comment with the current stream name (e.g. `lmg-streem-4`).
    - Extract stream name from the workspace path (e.g. `/Volumes/LargeDrive/lmg/lmg-streem-4` -> `lmg-streem-4`).
    - Transition: `uv run python -m helpers.atlassian_cli.cli jira transition-issue <KEY> --status "In Development"` (run from `airguard-integration-tests`).
    - Comment: `uv run python -m helpers.atlassian_cli.cli jira add-comment <KEY> --comment "🤖 Starting brainstorming on stream: <stream_name>"` (run from `airguard-integration-tests`).
-3. **Offer the visual companion just-in-time** — NOT upfront. The first time a question would genuinely be clearer shown than described, offer it then (its own message); on approval its browser tab opens for you. If no visual question ever arises, never offer it. See the Visual Companion section below.
-4. **Ask clarifying questions** — one at a time, understand purpose/constraints/success criteria
-5. **Propose 2-3 approaches** — with trade-offs and your recommendation
-6. **Present design** — in sections scaled to their complexity, get user approval after each section
-7. **Write design doc** — save to `docs/superpowers/specs/YYYY-MM-DD-<topic>-design.md` and commit
-8. **Spec self-review** — quick inline check for placeholders, contradictions, ambiguity, scope (see below)
-9. **User reviews written spec** — ask user to review the spec file before proceeding
-10. **Transition to implementation** — invoke writing-plans skill to create implementation plan
+4. **Offer the visual companion just-in-time** — NOT upfront. The first time a question would genuinely be clearer shown than described, offer it then (its own message); on approval its browser tab opens for you. If no visual question ever arises, never offer it. See the Visual Companion section below.
+5. **Ask clarifying questions** — one at a time, understand purpose/constraints/success criteria
+6. **Propose 2-3 approaches** — with trade-offs and your recommendation
+7. **Present design** — in sections scaled to their complexity, get user approval after each section
+8. **Write design doc** — save to `docs/superpowers/specs/YYYY-MM-DD-<topic>-design.md` and commit
+9. **Spec self-review** — quick inline check for placeholders, contradictions, ambiguity, scope (see below)
+10. **User reviews written spec** — ask user to review the spec file before proceeding
+11. **Transition to implementation** — invoke writing-plans skill to create implementation plan
 
 ## Process Flow
 
