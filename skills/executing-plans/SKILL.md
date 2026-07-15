@@ -60,7 +60,7 @@ After all tasks complete and verified:
 - Don't skip verifications
 - Reference skills when plan says to
 - Stop when blocked, don't guess
-- Never start implementation on main/master branch without explicit user consent
+- Never start implementation on main/master branch. For LMG workspace paths matching `/Volumes/LargeDrive/lmg/*`, you MUST automatically create and checkout a feature branch derived from the Jira ticket key (e.g. `<JIRA_KEY>_description` or `fix/<JIRA_KEY>-description`) before starting work. Do not stop to ask the user.
 
 ## Integration
 

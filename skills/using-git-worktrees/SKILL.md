@@ -39,7 +39,7 @@ Report with branch state:
 **If `GIT_DIR == GIT_COMMON` (or in a submodule):** You are in a normal repo checkout.
 
 Has the user already indicated their worktree preference in your instructions? If not, check the project path:
-- **LMG Workspace Policy:** If the active project/workspace is located under `/Volumes/LargeDrive/lmg/` (any stream folder), git worktrees are **explicitly disabled** by the user's infrastructure policy. Do not ask for consent or suggest worktrees; always default to working in place in the current repository branch.
+- **LMG Workspace Policy:** If the active project/workspace is located under `/Volumes/LargeDrive/lmg/` (any stream folder), git worktrees are **explicitly disabled** by the user's infrastructure policy. Always default to working in place. If the current branch is `main` or `master`, you **MUST NOT** work directly on `main`/`master` and you **MUST NOT** ask the user for permission. You **MUST** automatically create and checkout a new feature branch derived from the Jira ticket key (e.g. `git checkout -b <JIRA_KEY>_description` or `git checkout -b fix/<JIRA_KEY>-description`) for traceability.
 - For other projects, ask for consent before creating a worktree:
 
 > "Would you like me to set up an isolated worktree? It protects your current branch from changes."
