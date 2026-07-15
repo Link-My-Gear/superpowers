@@ -71,7 +71,7 @@ Or ask: "This branch split from main - is that correct?"
 Implementation complete. What would you like to do?
 
 1. Merge back to <base-branch> locally
-2. Push and create a Pull Request
+2. Push, run reviews/tests, and create a Pull Request (via ship-pr skill)
 3. Keep the branch as-is (I'll handle it later)
 4. Discard this work
 
@@ -83,7 +83,7 @@ Which option?
 ```
 Implementation complete. You're on a detached HEAD (externally managed workspace).
 
-1. Push as new branch and create a Pull Request
+1. Push as new branch and create a Pull Request (via ship-pr skill)
 2. Keep as-is (I'll handle it later)
 3. Discard this work
 
@@ -120,6 +120,9 @@ git branch -d <feature-branch>
 
 #### Option 2: Push and Create PR
 
+**LMG WORKSPACE POLICY:** For any repository path matching `/Volumes/LargeDrive/lmg/*`, Option 2 **MUST** be executed by calling the `ship-pr` skill. You must not run raw `git push` directly; instead, invoke the `ship-pr` skill to ensure the 7 mandatory review subagents (`code-reviewer`, `comment-analyzer`, `pr-test-analyzer`, `silent-failure-hunter`, `type-design-analyzer`, `security-auditor`, and `backend-system-architect`) and automated validation/testing checks are fully executed.
+
+For other repositories:
 ```bash
 # Push branch
 git push -u origin <feature-branch>
