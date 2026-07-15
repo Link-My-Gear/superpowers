@@ -38,11 +38,13 @@ Report with branch state:
 
 **If `GIT_DIR == GIT_COMMON` (or in a submodule):** You are in a normal repo checkout.
 
-Has the user already indicated their worktree preference in your instructions? If not, ask for consent before creating a worktree:
+Has the user already indicated their worktree preference in your instructions? If not, check the project path:
+- **LMG Workspace Policy:** If the active project/workspace is located under `/Volumes/LargeDrive/lmg/` (any stream folder), git worktrees are **explicitly disabled** by the user's infrastructure policy. Do not ask for consent or suggest worktrees; always default to working in place in the current repository branch.
+- For other projects, ask for consent before creating a worktree:
 
 > "Would you like me to set up an isolated worktree? It protects your current branch from changes."
 
-Honor any existing declared preference without asking. If the user declines consent, work in place and skip to Step 2.
+Honor any existing declared preference without asking. If the user declines consent (or the LMG Workspace Policy applies), work in place and skip to Step 2.
 
 ## Step 1: Create Isolated Workspace
 
