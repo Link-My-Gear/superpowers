@@ -141,6 +141,7 @@ Wait for the user's response. If they request changes, make them and re-run the 
 
 ## Key Principles
 
+- **REMOTE DOCKER SANDBOX:** If the feature requires a local backend or local Docker setup, you **MUST** specify/use the remote sandbox environment (Punto) instead of running Docker Desktop locally. Local Docker hosting is explicitly disabled due to capacity constraints.
 - **One question at a time** - Don't overwhelm with multiple questions
 - **Multiple choice preferred** - Easier to answer than open-ended when possible
 - **YAGNI ruthlessly** - Remove unnecessary features from all designs
