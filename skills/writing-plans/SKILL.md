@@ -71,7 +71,8 @@ independently testable deliverable.
 [The spec's project-wide requirements — version floors, dependency limits,
 naming and copy rules, platform requirements — one line each, with exact
 values copied verbatim from the spec. Every task's requirements implicitly
-include this section.]
+include this section.
+- **REMOTE DOCKER SANDBOX:** If the implementation requires a local backend or local Docker setup, the plan **MUST** specify/use the remote sandbox environment (Punto) instead of running Docker Desktop locally.]
 
 ---
 ```
