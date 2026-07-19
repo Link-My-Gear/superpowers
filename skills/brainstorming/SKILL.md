@@ -22,26 +22,28 @@ Every project goes through this process. A todo list, a single-function utility,
 You MUST create a task for each of these items and complete them in order:
 
 1. **Refresh Workspace Stream**: If the active project/workspace is located under `/Volumes/LargeDrive/lmg/` (any stream folder), you **MUST** run the `refresh-stream` skill (by executing `uv run /Volumes/LargeDrive/lmg/cursor-skills/scripts/reset-stream-repos.py --yes` inside LMG workspace streams) before exploring files or planning, ensuring that you brainstorm on the latest available code on main.
-2. **Explore project context** — check files, docs, recent commits
-3. **Claim ticket on Jira** — if this brainstorming is for a specific Jira ticket (e.g. ARG-XXX), ensure it is transitioned to **In Development** and post a comment with the current stream name (e.g. `lmg-streem-4`).
+2. **Check for Existing Implementation**: If this brainstorming is for a specific Jira ticket (e.g. `ARG-XXX`), check all repositories in the workspace stream for any existing branches (e.g. `git branch -a | grep -i ARG-XXX`) or commits (e.g. `git log --all --grep="ARG-XXX"`) containing the ticket key. If an existing branch, commit, or PR for this ticket is found, **STOP**. Do not start brainstorming or planning from scratch. Present the existing implementation state to the user and ask for direction on how to proceed.
+3. **Explore project context** — check files, docs, recent commits
+4. **Claim ticket on Jira** — if this brainstorming is for a specific Jira ticket (e.g. ARG-XXX), ensure it is transitioned to **In Development** and post a comment with the current stream name (e.g. `lmg-streem-4`).
    - Extract stream name from the workspace path (e.g. `/Volumes/LargeDrive/lmg/lmg-streem-4` -> `lmg-streem-4`).
    - Transition: `uv run python -m helpers.atlassian_cli.cli jira transition-issue <KEY> --status "In Development"` (run from `airguard-integration-tests`).
    - Comment: `uv run python -m helpers.atlassian_cli.cli jira add-comment <KEY> --comment "🤖 Starting brainstorming on stream: <stream_name>"` (run from `airguard-integration-tests`).
-4. **Offer the visual companion just-in-time** — NOT upfront. The first time a question would genuinely be clearer shown than described, offer it then (its own message); on approval its browser tab opens for you. If no visual question ever arises, never offer it. See the Visual Companion section below.
-5. **Ask clarifying questions** — one at a time, understand purpose/constraints/success criteria
-6. **Propose 2-3 approaches** — with trade-offs and your recommendation
-7. **Present design** — in sections scaled to their complexity, get user approval after each section
-8. **Write design doc** — save to `docs/superpowers/specs/YYYY-MM-DD-<topic>-design.md` and commit.
-9. **Hook up references on Jira** — post a Jira comment with a reference to the written spec / recommended proposal path so that reviewers can access the recommendation to be reviewed:
-   - Comment: `uv run python -m helpers.atlassian_cli.cli jira add-comment <KEY> --comment "🤖 Design proposal/recommendation ready for review: docs/superpowers/specs/YYYY-MM-DD-<topic>-design.md"`
-10. **Spec self-review** — quick inline check for placeholders, contradictions, ambiguity, scope (see below)
-11. **User reviews written spec** — ask user to review the spec file before proceeding
-12. **Transition to implementation** — invoke writing-plans skill to create implementation plan
+5. **Offer the visual companion just-in-time** — NOT upfront. The first time a question would genuinely be clearer shown than described, offer it then (its own message); on approval its browser tab opens for you. If no visual question ever arises, never offer it. See the Visual Companion section below.
+6. **Ask clarifying questions** — one at a time, understand purpose/constraints/success criteria
+7. **Propose 2-3 approaches** — with trade-offs and your recommendation
+8. **Present design** — in sections scaled to their complexity, get user approval after each section
+9. **Write design doc** — save to `docs/superpowers/specs/YYYY-MM-DD-<topic>-design.md` and commit.
+10. **Hook up references on Jira** — post a Jira comment with a reference to the written spec / recommended proposal path so that reviewers can access the recommendation to be reviewed:
+    - Comment: `uv run python -m helpers.atlassian_cli.cli jira add-comment <KEY> --comment "🤖 Design proposal/recommendation ready for review: docs/superpowers/specs/YYYY-MM-DD-<topic>-design.md"`
+11. **Spec self-review** — quick inline check for placeholders, contradictions, ambiguity, scope (see below)
+12. **User reviews written spec** — ask user to review the spec file before proceeding
+13. **Transition to implementation** — invoke writing-plans skill to create implementation plan
 
 ## Process Flow
 
 ```dot
 digraph brainstorming {
+    "Check for existing implementation" [shape=box];
     "Explore project context" [shape=box];
     "Ask clarifying questions" [shape=box];
     "Propose 2-3 approaches" [shape=box];
@@ -53,6 +55,7 @@ digraph brainstorming {
     "User reviews spec?" [shape=diamond];
     "Invoke writing-plans skill" [shape=doublecircle];
 
+    "Check for existing implementation" -> "Explore project context";
     "Explore project context" -> "Ask clarifying questions";
     "Ask clarifying questions" -> "Propose 2-3 approaches";
     "Propose 2-3 approaches" -> "Present design sections";
